@@ -2,7 +2,7 @@
 
 ## Challenge description 
 ![img](Pasted_image_20210614000841.png)</br>
-As we can see Stylish is the one of the hardest challenges at the website and it give us 400 points.
+Stylish is the one of the hardest challenges at the website and it give us 400 points.
 Organizers give us URL to website and server source code files.  
 
 
@@ -13,7 +13,7 @@ Ok so as we can see at website we have got 4 color inputs serialized with JSON a
 But second important thing in our website is "Get flag" button.
 
 ![img](Pasted_image_20210613000448.png)</br>
- As we can see we need to know admin secret code to get the flag.
+Our goal in this CTF is steal admin secret code to the flag.
 
 ## Look at the source code 
 #### passcode.js
@@ -77,7 +77,7 @@ app.post("/submit", async (req, res) => {
  await page.click(".s");
  await timeout(1000);
  ```
-As we can see CSS sent by user isn't verified at all (except checking if it is string but it's not problem at all) so we can easily inject own CSS style.
+By looking at the source code we can see that CSS sent by user isn't verified at all (except checking if it is string but it's not problem at all) so we can easily inject own CSS style.
 After setting our CSS style admin sets id (always beginning at "button") to button which creates randomly generated passcode and click them.   
 
 
