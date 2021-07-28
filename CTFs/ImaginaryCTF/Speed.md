@@ -1,6 +1,6 @@
 # Speedrun writeup
 
-![[Pasted image 20210727182820.png]]
+<img src="Pasted image 20210727182820.png" alt="Speedrun chal">
 
 ## Connection to the server
 
@@ -96,14 +96,14 @@ Ok program is very simple and vulnerable.
 1. Python program generates c++ code with random array size what makes exploitation a little bit harder. 
 2. Python program compiles procedural generated C++ code with "-fno-stack-protector", "-no-pie" settings what is a big security mistake.
 3. Python program sends to user copy of the generated program encoded in base64 
-4. Python run code written in C++ as subprocess
-	1. Subprocess gets from user input without any size restriction and allocate it in array what can cause bufferoverflow 
+4. Python run code written in C++ as a subprocess
+	1. Subprocess gets data from user input without any size restriction and allocates it in array what can cause bufferoverflow 
 	2. Subprocess says "Thanks!" and this is his end 
 5. Python program removes file from disk
 
 
 ### Server connection 
-![[Pasted image 20210727182926.png]]
+<img src="Pasted image 20210727182926.png" alt="netcat connection">
 
 When we connect to the server, we will see cool Minecraft banner and compiled binary file encoded in base64 
 
@@ -111,35 +111,34 @@ When we connect to the server, we will see cool Minecraft banner and compiled bi
 When we decode and save sent to us program, we can check security settings in pwntools for more information.
 As we can see program is vulnerable to Ret2Libc Bufferoverflow attack because only NX flags are enabled.  
 
-![[Pasted image 20210727185235.png]]
+<img src="Pasted image 20210727185235.png" alt="checksec">
 
 
 ## Exploitation 
-In this challenge we have only a few second to send exploit so we need to do all the steps automatically from python script which will send exploit and give us shellcode.
+In this challenge, we have only a few seconds to send exploit so we need to do all the steps automatically from python script which will send exploit and give us a shellcode.
 Exploitation process
 1. Decode given base64 string and scan it in search of array size (to overflow array we need to know his size). 
-2. Generate and send payload which will: 
+2. Generate and sends payload which will: 
 	1. Overflow array (if we want to override any address on stack we need to overflow buffer)
-	2. Return to address from stack (it's seems to be useless but we need to keep stack alignment)
-	3. Pop `got.puts` address to RDI register and return (got it's memory region where is stored addresses to external functions we need to leak it to guess libc version and calculate It's address)
+	2. Return to address from stack (it seems to be useless but we need to keep stack alignment)
+	3. Pop `got.puts` address to RDI register and return ("got" it's memory region where is stored addresses to external functions wich we need to leak it to guess libc version and calculate It's address)
 	4. Run puts (to print puts address)
-	5. Return to main (to run second exploit which will use prited adresssys)
+	5. Return to main (to run the second exploit which will use printed addresses)
 3. Get printed by program address of `got.puts` \[which we will save in notepadd\]
-4. Send one more time payload from second step but with `got.gets` in third step. \[which we will save in notepadd\]
-5. Check in online databes for which libc version are typical this function adressys 
+4. Send one more time payload from second step but with `got.gets` in the third step. \[which we will save in notepadd\]
+5. Check in online database for which libc version are typical this function addresses 
 6. Get offsets from symbols table 
-7. Run exploit from second step and dynamicly calculate libc address 
+7. Run exploit from second step and dynamically calculate libc address (puts address - offset = libc base adress)
 8. Send second payload which will:
 	1. Overflow array 
-	2. Return to address from stack (stack aligment)
+	2. Return to address from stack (stack alignment)
 	3. Pop "/bin/sh" string address to RDI register (it will be argument to "system" function) 
 	4. Run system() function (it will run "/bin/sh" command and give us shell) 
-9. Give us controll 
-
+9. Give us control 
 
 
 ### Array size scaner
-![[Pasted image 20210727202414.png]]
+<img src="Pasted image 20210727202414.png" alt="re">
  
 In pattern I decided to use 
 
@@ -148,13 +147,15 @@ push   rbp
 mov    rbp, rsp
 sub    rsp, [ARRAY SIZE]
 ```
-next three bytes after this instructions are int which determinate array size
+next three bytes after this instructions are in which determine array size
 this operation in hex are:
 ```
 48 89 E5 48 81 EC [? ? ?]
 ```
+where array size are three question marks
 
-Code which scan array in file via pattern 
+
+Code which scan array in file via prepared pattern 
 ```py
 from pwn import *
 import base64
@@ -239,7 +240,7 @@ To determinate which Libc version is running in the server we need to check whic
 To do this I used https://libc.blukat.me// and past there last 3 characters from puts and gets address. Website returned to me libc version running at the server  
 and usefull offsets (especially: system function and "/bin/sh" string)  
 
-![[Pasted image 20210727204947.png]]
+<img src="Pasted image 20210727204947.png" alt="website">
 
 ## Second payload
 When we know libc address we can run not linked function directly from library in our case it will be system("/bin/sh").  
