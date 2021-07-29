@@ -137,7 +137,7 @@ Exploitation process
 9. Give us control 
 
 
-### Array size scaner
+### Array size scanner
 <img src="Pasted image 20210727202414.png" alt="re">
  
 In pattern I decided to use 
