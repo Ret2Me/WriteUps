@@ -340,6 +340,6 @@ server.interactive()
 ```
 
 ## Credits: 
-Writeup by Filip "Ret2Me" Poplewski
-Solved by Filip "Ret2Me" Poplewski
-WaletSec 2021 
+Writeup by: Filip "Ret2Me" Poplewski</br>
+Solved by: Filip "Ret2Me" Poplewski</br>
+Team: WaletSec</br>
