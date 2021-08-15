@@ -258,7 +258,7 @@ payload += p64(libc + 0x0449c0)       # system()
 ## Launching the exploit
 Finall version of the exploit is: 
 
-[![asciicast](https://asciinema.org/a/HGDVWN49PCOvR23c3LpSevxhK.svg)](https://asciinema.org/a/HGDVWN49PCOvR23c3LpSevxhK)
+[![asciicast](https://asciinema.org/a/430559.svg)](https://asciinema.org/a/430559)
 
 Exploit code:
 ```py
@@ -338,3 +338,8 @@ payload += p64(libc + 0x0449c0) # system()
 server.sendline(payload)
 server.interactive()
 ```
+
+## Credits: 
+Writeup by Filip "Ret2Me" Poplewski
+Solved by Filip "Ret2Me" Poplewski
+WaletSec 2021 
