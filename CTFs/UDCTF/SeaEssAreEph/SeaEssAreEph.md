@@ -63,7 +63,7 @@
 </br>
 
 ## Attack
-### In the first field we need to fill our username because when admin click at the link we want send money to our selfs.</br>At the second field amount of money that will be send to us.
+### In the first field we need to fill our username because when website administrator click at the link we want send money to our selfs.</br>At the second field amount of money that will be send to us.
 ![money_transfer](money_transfer.png "money_transfer")
 </br>
 
@@ -82,7 +82,7 @@
 ![sent](sent.png "sent")
 </br>
 
-### we are rich, now we can buy a flag :)
+### We are rich, now we can buy a flag :)
 
 ![rich](rich.png "rich")
 </br>
