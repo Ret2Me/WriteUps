@@ -1,0 +1,229 @@
+
+
+
+                STACK
+    (pamiętajmy że stos rośnie do dołu)
++----------------------------------------+ 
+|                                        |
+|  Nie interesująca nas reszta sterty    |
+|  będziemy ją nadpisywać własnymi       |
+|  adresami powrotu oraz wartościami     |
+|  zrzucanymi na rejestry robocze        |
+|  procesora.                            |
+|                                        |
++----------------------------------------+
+|                                        |
+|  Adres powrotu, znjaduje się tutaj     |
+|  adres pod który program ma skoczyć po |
+|  wykonaniu funkcji                     |
+|                                        |
++----------------------------------------+
+|                                        |
+|  Segment poświęcony funkcji w której   |
+|  się aktualnie znajdujemy. Jest tutaj  |
+|  nasz buffor, zmienne lokane i wiele   |  <- Tu jesteśmy
+|  innych.                               |
+|                                        |
++----------------------------------------+
+
+
+    
+
+
+
+
+                STACK 
++----------------------------------------+
+|                                        |
+|  Nie interesujące nas pozostałości
+|  stosu                                 |
+|                                        |
++----------------------------------------+
+|                                        |
+|  Adres funkcji "system" znajdującej    |
+|  się w libc                            | 
+|                                        |
++----------------------------------------+
+|                                        |
+|  Adres do ciągu znaków "/bin/sh"       |
+|  znajdujący się w libc                 | 
+|                                        |
++----------------------------------------+
+|                                        |
+| Adres do operacji "pop rdi; ret"       |
+|                                        |
++----------------------------------------+
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |   Padding słóżący przepelnieniu bufora
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
++----------------------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            STACK 
+
++----------------------------------------+
+|                                        |
+|  Adres podatnej funkcji "calculator".  |
+|                                        |
++----------------------------------------+
+|                                        |
+|  Adres komórki w sekcji PLT            |
+|  odpowiedzialny za wywołanie funkcji   |_____________.
+|  puts.                                 |             |
+|                                        |             |
++----------------------------------------+            \/
+|                                        |           puts(adres_funkcji_puts)
+| Adres komórki w sekcji GOT zawierający |                    ^
+| adres funkcji puts. Będzie to argument |--------------------|
+| wywoływanej przez nas funkcji.         |
+|                                        |
++----------------------------------------+
+|                                        |
+| Adres do operacji "pop rdi; ret"       |
+|                                        |
++----------------------------------------+
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  | <--- Padding słóżący przepelnieniu bufora
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
++----------------------------------------+
+
+            _______
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+        __/         \__
+        \             /
+         \           /
+          \         /
+           \_______/
+
+
+ ________________________________________________
+| Okno konsoli z uruchomioną aplikacją    _ O X  |
+|________________________________________________|
+|                                                |
+|                                                |
+|       [Klasyczne komunikaty z aplikacji]       |
+|                                                |
+|         [Wypisany adres funkcji PUTS]          |
+|                                                |
+|        Oczekiwanie na input użytkownika...     |
+|                                                |
+|                                                |
+|                                                |
+|________________________________________________|
+
+            _______
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+        __/         \__
+        \             /
+         \           /
+          \         /
+           \_______/
+
+
+ _________________________________________________________________
+|  Nasz program odczytuje wypisany w konsoli ad_res funkcji puts  |
+|  i na jego podstawie oblicza adres podstawowy biblioteki libc.  |
+|  Kiedy mamy adres biblioteki libc oraz przesunięcie funkcji     |
+|  "system" możemy obliczyć jej adres. Tak samo postępujemy dla   |
+|  ciągu "/bin/sh" który również znajduje się w bibliotece libc.  |
+|_________________________________________________________________|
+
+
+            _______
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+        __/         \__
+        \             /
+         \           /
+          \         /
+           \_______/
+
+
+
+
+
+
++----------------------------------------+
+|                                        |
+|  Nie interesujące nas pozostałości     |
+|                                        |
++----------------------------------------+
+|                                        |
+|  Adres do funkcji "system"             |
+|  znajdującej się w libc                |__________________
+|                                        |                 \/
++----------------------------------------+                system("/bin/sh")
+|                                        |                           ^
+|  Adres do ciągu znaków "/bin/sh"       |---------------------------|
+|  znajdujący się w libc                 |
+|                                        |
++----------------------------------------+
+|                                        |
+| Adres do operacji "pop rdi; ret"       |
+|                                        |
++----------------------------------------+
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  | <--- Padding słóżący przepelnieniu bufora
+|  YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY  |
++----------------------------------------+
+
+
+            _______
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+           |       |
+        __/         \__
+        \             /
+         \           /
+          \         /
+           \_______/
+
+
+
+ ________________________________________________
+| Okno konsoli z uruchomioną aplikacją    _ O X  |
+|________________________________________________|
+|                                                |
+|                                                |
+|       [Klasyczne komunikaty z aplikacji]       |
+|                                                |
+|         [Wypisany adres funkcji PUTS]          |
+|                                                |
+|           [URUCHOMIENIE "/bin/sh"]             |
+|                                                |
+|                                                |
+|                                                |
+|________________________________________________|
