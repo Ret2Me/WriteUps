@@ -61,10 +61,10 @@ A teraz sprawdźmy co się stanie jak usuniemy pierwszego użytkownika i stworzy
 ```
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb[NULL]ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc[NULL]A
 ```
-litery a - nadpiszą dane naszego użytkownika 
-litery b - nadpiszą username sąsiedniego użytkownika
-litery c - jego hasło
-litera A - zmienia uprawnienia administratora na true (true to każda wartość inna niż zero w tym przypadku dla 'A' będzie to 65)
+litery a - nadpiszą dane naszego użytkownika  
+litery b - nadpiszą username sąsiedniego użytkownika  
+litery c - jego hasło  
+litera A - zmienia uprawnienia administratora na true (true to każda wartość inna niż zero w tym przypadku dla 'A' będzie to 65)  
 
 ![img](./img/Pasted_image_20211106001507.png)
 
