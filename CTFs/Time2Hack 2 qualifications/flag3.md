@@ -23,7 +23,7 @@ Analizę programu należy rozpocząć od inżynierii wstecznej.
 
 ![img](./img/Pasted_image_20211105203911.png)
 
-Jak widzimy nasza funkcja main zawiera switch casea osadzonego w pentli while i cztery funkcje odpowiadające za: 
+Jak widzimy nasza funkcja main zawiera switch casea osadzonego w pentli while i pięć funkcji odpowiadających za: 
 * rejestrację użytkowników,
 * logowanie użytkowników,
 * usuwanie użytkowników,
