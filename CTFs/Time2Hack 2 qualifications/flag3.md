@@ -1,12 +1,12 @@
-# Flag 3
-Aby zdobyć trzecią flagę należy zaatakować aplikację uruchamianą z suid bit znajdującą się w `/usr/local/bin/heheap`.
-
-### Rekonesans 
+# Flaga trzecia
+Aby zdobyć trzecią flagę należy zaatakować aplikację uruchamianą z suid bit znajdującą się w `/usr/local/bin/heheap` 
+## Rekonesans 
 
 Jak widzimy program "file" poinformował nas, iż "heheap" jest plikiem wykonywalnym 64-bitowym. 
-![img](./img/Pasted_image_20211105211619.png)
+![img](./img/Pasted_image_20211105211619.png)  
 
-Po uruchomieniu programu wyświetli nam się panel zarządzania kontem, w którym mamy możliwość: rejestracji, logowania i usuwania konta oraz logowania na panel administratora.
+
+Po uruchomieniu programu wyświetli nam się panel zarządzania kontem, w którym mamy możliwość: rejestracji, logowania i usuwania konta oraz logowania do panelu administratora.
 ![img](./img/Pasted_image_20211105211113.png)
 
 No dobrze spróbujmy zatem utworzyć użytkownika, a następnie zalogować się za jego pomocą do panelu administratora:  
@@ -17,7 +17,7 @@ Użytkownik został znaleziony, hasło potwierdzone, lecz podany użytkownik nie
 
 
 
-### Inżynieria wsteczna
+## Inżynieria wsteczna
 
 Analizę programu należy rozpocząć od inżynierii wstecznej.
 
@@ -32,7 +32,7 @@ Jak widzimy nasza funkcja main zawiera switch casea osadzonego w pentli while i 
 
 Zacznijmy od analizy pierwszej funkcji (odpowiedzialnej za rejestrację).  
 
-![img](./img/register_1.png)
+![img](./img/register.png)
 
 Z funkcji rejestracji możemy wydedukować, iż struktura użytkownika składa się z trzech pól:
 1. nazwa użytkownika (zapisywana na początku zaalokowanej pamięci na heapie)
@@ -49,7 +49,7 @@ A więc algorytm ataku wygląda następująco:
 3. Tworzymy nowego użytkownika podając dane które nadpiszą dane o drugim użytkowniku. 
 
 
-### GDB
+## GDB
 
 Uruchommy program w gdb i zobaczmy jak będzie to wyglądać to w praktyce.
 Wpierw zobaczmy jak wygląda heap z dwoma "standardowymi" użytkownikami.  
@@ -71,8 +71,8 @@ litera A - zmienia uprawnienia administratora na true (true to każda wartość 
 
 Heap po utworzeniu nowego użytkownika:  
 ![img](./img/Pasted_image_20211106001553.png)
-![img](./img/Pasted_image_20211106001617.png)
-Jak widzimy udało nam się nadpisać dane drugiego usera (wraz z bajtem odpowiedzialnym za informacje o tym, czy jest on administratorem) naszym specjalnie spreparowanym ciągiem. Teraz wystarczy już tylko się zalogować na panel administratora naszym nowym hasłem:
+![img](./img/Pasted_image_20211106001617.png)  
+Jak widzimy udało nam się nadpisać dane drugiego usera (wraz z bajtem odpowiedzialnym za informacje o tym, czy jest on administratorem) naszym specjalnie spreparowanym ciągiem. Teraz wystarczy już tylko się zalogować do panelu administratora naszym nowym hasłem:
 
 ```
 new login:
@@ -87,6 +87,6 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 Jak widzimy po zalogowaniu się na konto administratora został uruchomiony bash z uprawnieniami administratora.
 
-<script id="asciicast-Z3R3X6ICXIUB7Zpbc9t6mEVhW" src="https://asciinema.org/a/Z3R3X6ICXIUB7Zpbc9t6mEVhW.js" async></script>
+<a href="https://asciinema.org/a/Z3R3X6ICXIUB7Zpbc9t6mEVhW" target="_blank"><img src="https://asciinema.org/a/Z3R3X6ICXIUB7Zpbc9t6mEVhW.svg" /></a>
 
-Kiedy mamy już ułożony payload wystarczy go tylko użyć na serwerze konkursowym i odczytać flagęs.
+Kiedy mamy już ułożony payload wystarczy go tylko użyć na serwerze konkursowym i odczytać flagę.
