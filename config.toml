@@ -1,4 +1,5 @@
 baseURL = 'https://ret2me.github.io/WriteUps/'
+canonifyurls=true
 languageCode = 'en-us'
 title = 'Filip Poplewski'
 theme = ["hugo-embed-pdf-shortcode", "terminal"]
