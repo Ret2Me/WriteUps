@@ -2,7 +2,7 @@
 title = "Time2Hack Pwn"
 date = "2021-10-25T22:13:03+02:00"
 author = "Filip Poplewski"
-cover = "/Time2Hack/LogoAW.png"
+cover = "Time2Hack/LogoAW.png"
 tags = ["CTF", "PWN", "ReverseEngineering"]
 description = """
 
