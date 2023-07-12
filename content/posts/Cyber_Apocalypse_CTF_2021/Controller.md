@@ -14,4 +14,4 @@ hideComments = false
 color = "" #color from the theme settings
 +++
 
-{{< embed-pdf url="/Cyber_Apocalypse_CTF_2021/Controller.pdf"  >}}
+{{< embed-pdf url="Cyber_Apocalypse_CTF_2021/Controller.pdf"  >}}

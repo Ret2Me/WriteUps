@@ -18,7 +18,7 @@ color = "" #color from the theme settings
 
 # Speedrun writeup
 
-![img](/ImaginaryCTF/Pasted_image_20210727182820.png)
+![img](ImaginaryCTF/Pasted_image_20210727182820.png)
 
 ## Connection to the server
 
@@ -129,7 +129,7 @@ When we connect to the server, we will see cool Minecraft banner and compiled bi
 When we decode and save sent to us program, we can check security settings in pwntools for more information.
 As we can see program is vulnerable to Ret2Libc Bufferoverflow attack because only NX flags are enabled.  
 
-![img](/ImaginaryCTF/Pasted_image_20210727185235.png) 
+![img](ImaginaryCTF/Pasted_image_20210727185235.png) 
 
 
 ## Exploitation 
@@ -156,7 +156,7 @@ Exploitation process
 
 
 ### Array size scanner
-![img](/ImaginaryCTF/Pasted_image_20210727202414.png) 
+![img](ImaginaryCTF/Pasted_image_20210727202414.png) 
  
 In pattern I decided to use 
 

