@@ -1,0 +1,6 @@
+[submodule "writeups/themes/terminal"]
+	path = writeups/themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
+[submodule "writeups/themes/hugo-embed-pdf-shortcode"]
+	path = writeups/themes/hugo-embed-pdf-shortcode
+	url = https://github.com/anvithks/hugo-embed-pdf-shortcode.git
