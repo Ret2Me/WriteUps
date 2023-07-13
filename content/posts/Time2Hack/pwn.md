@@ -39,7 +39,7 @@ Użytkownik został znaleziony, hasło potwierdzone, lecz podany użytkownik nie
 
 Analizę programu należy rozpocząć od inżynierii wstecznej.
 
-![img](Time2Hack/Pasted_image_20211105203911.png)
+![img](/Time2Hack/Pasted_image_20211105203911.png)
 
 Jak widzimy nasza funkcja main zawiera switch casea osadzonego w pentli while i pięć funkcji odpowiadających za: 
 * rejestrację użytkowników,
@@ -50,7 +50,7 @@ Jak widzimy nasza funkcja main zawiera switch casea osadzonego w pentli while i 
 
 Zacznijmy od analizy pierwszej funkcji (odpowiedzialnej za rejestrację).  
 
-![img](Time2Hack/register.png)
+![img](/Time2Hack/register.png)
 
 Z funkcji rejestracji możemy wydedukować, iż struktura użytkownika składa się z trzech pól:
 1. nazwa użytkownika (zapisywana na początku zaalokowanej pamięci na heapie)
