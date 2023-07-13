@@ -21,15 +21,15 @@ Aby zdobyć trzecią flagę należy zaatakować aplikację uruchamianą z suid b
 ## Rekonesans 
 
 Jak widzimy program "file" poinformował nas, iż "heheap" jest plikiem wykonywalnym 64-bitowym. 
-![img](Time2Hack/Pasted_image_20211105211619.png)  
+![img](/Time2Hack/Pasted_image_20211105211619.png)  
 
 
 Po uruchomieniu programu wyświetli nam się panel zarządzania kontem, w którym mamy możliwość: rejestracji, logowania i usuwania konta oraz logowania do panelu administratora.
-![img](Time2Hack/Pasted_image_20211105211113.png)
+![img](/Time2Hack/Pasted_image_20211105211113.png)
 
 No dobrze spróbujmy zatem utworzyć użytkownika, a następnie zalogować się za jego pomocą do panelu administratora:  
 
-![img](Time2Hack/Pasted_image_20211105211242.png)
+![img](/Time2Hack/Pasted_image_20211105211242.png)
 
 Użytkownik został znaleziony, hasło potwierdzone, lecz podany użytkownik nie ma uprawnień administratora przez co logowanie zostało odrzucone.
 
@@ -72,8 +72,8 @@ A więc algorytm ataku wygląda następująco:
 Uruchommy program w gdb i zobaczmy jak będzie to wyglądać to w praktyce.
 Wpierw zobaczmy jak wygląda heap z dwoma "standardowymi" użytkownikami.  
 
-![img](Time2Hack/Pasted_image_20211105222758.png)
-![img](Time2Hack/Pasted_image_20211105222852.png)
+![img](/Time2Hack/Pasted_image_20211105222758.png)
+![img](/Time2Hack/Pasted_image_20211105222852.png)
 
 A teraz sprawdźmy co się stanie jak usuniemy pierwszego użytkownika i stworzymy nowego z podanym ciągiem jako hasło:
 ```
@@ -84,12 +84,12 @@ litery b - nadpiszą username sąsiedniego użytkownika
 litery c - jego hasło  
 litera A - zmienia uprawnienia administratora na true (true to każda wartość inna niż zero w tym przypadku dla 'A' będzie to 65)  
 
-![img](Time2Hack/Pasted_image_20211106001507.png)
+![img](/Time2Hack/Pasted_image_20211106001507.png)
 
 
 Heap po utworzeniu nowego użytkownika:  
-![img](Time2Hack/Pasted_image_20211106001553.png)
-![img](Time2Hack/Pasted_image_20211106001617.png)  
+![img](/Time2Hack/Pasted_image_20211106001553.png)
+![img](/Time2Hack/Pasted_image_20211106001617.png)  
 Jak widzimy udało nam się nadpisać dane drugiego usera (wraz z bajtem odpowiedzialnym za informacje o tym, czy jest on administratorem) naszym specjalnie spreparowanym ciągiem. Teraz wystarczy już tylko się zalogować do panelu administratora naszym nowym hasłem:
 
 ```
@@ -100,7 +100,7 @@ new passwd:
 ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 ```
 
-![img](Time2Hack/Pasted_image_20211106001734.png)
+![img](/Time2Hack/Pasted_image_20211106001734.png)
 
 
 Jak widzimy po zalogowaniu się na konto administratora został uruchomiony bash z uprawnieniami administratora.
